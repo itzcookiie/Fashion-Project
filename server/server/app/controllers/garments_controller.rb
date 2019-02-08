@@ -5,7 +5,8 @@ class GarmentsController < ApplicationController
     end
 
     def create
-        @garment = Garment.new(category: params[:category], colour: params[:colour], image_url: params[:image_url], user_id: current_user.id)
+        @garment = Garment.new(garment_params)
+        @garment.user_id = current_user.id
         if @garment.save
             render json: @garment 
         else
@@ -23,8 +24,8 @@ class GarmentsController < ApplicationController
         end
     end
         
-    # def garment_params
-    #     params.require(:garment).permit(:category, :colour, :image_url, :user_id, :current_user.id)
-    # end
+    def garment_params
+        params.require(:garment).permit(:category, :colour, :image_url, images: [])
+    end
         
 end 
