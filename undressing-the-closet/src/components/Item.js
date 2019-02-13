@@ -1,118 +1,66 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import classnames from 'classnames'
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
-import Collapse from '@material-ui/core/Collapse'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import red from '@material-ui/core/colors/red'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import ShareIcon from '@material-ui/icons/Share'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-import API from '../API'
-
-const styles = (theme) => (
-  {
+const styles = {
   card: {
-    maxWidth: 400
+    minWidth: 275,
   },
-  actions: {
-    display: 'flex'
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    }),
-    marginLeft: 'auto',
-    [theme.breakpoints.up('sm')]: {
-      marginRight: -8
-    }
+  title: {
+    fontSize: 14,
   },
-  expandOpen: {
-    transform: 'rotate(180deg)'
+  pos: {
+    marginBottom: 12,
   },
-  avatar: {
-    backgroundColor: red[500]
-  }, 
-}) 
+};
 
-class Item extends React.Component {
+function SimpleCard(props) {
+  const { classes, delItem, item, shouldHaveButtons, randomItem, findItem,
+  selectItem, displayOutfit, keepItem } = props;
+  const bull = <span className={classes.bullet}>•</span>;
 
-    state = {
-      expanded: false,
-    }
-
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }))
-  };
-
-  // delItem(id) {
-  //   // console.log(this.props.item)
-  //   API.deleteGarment(id)
-  //   .then(console.log) 
-  // }
-
-  render () {
-    const { classes, item, delItem } = this.props
-
-    return (
-      <Card style={{margin: '10px'}} className={classes.card}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label='Recipe' className={classes.avatar} style={{backgroundColor: item.colour}}>
-              {item.colour[0]}
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={item.category}
-          subheader={<img src={item.image_url} /> } 
-        />
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label='Add to favorites'>
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label='Share'>
-            <ShareIcon />
-          </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label='Show more'
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={this.state.expanded} timeout='auto' unmountOnExit>
-          <CardContent>
-            <Typography paragraph variant='body2'>
-              {item.category}
-              <br />
-              <button onClick={() => delItem(this.props.item.id)}>Delete item</button>
-            </Typography>
-          </CardContent>
-        </Collapse>
-      </Card>
-    )
-  }
+  return (
+    <Card className={classes.card}>
+      <CardContent>
+        {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
+          Word of the Day
+        </Typography> */}
+        {/* <Typography variant="h5" component="h2">
+          be
+          {bull}
+          nev
+          {bull}o{bull}
+          lent
+        </Typography> */}
+        {/* <Typography className={classes.pos} color="textSecondary">
+          adjective
+        </Typography> */}
+        <Typography component="p">
+          {<img src={props.item.image_url} /> }
+        </Typography>
+      </CardContent>
+      <CardActions>
+        {/* <Button size="small">Learn More</Button> */}
+        {shouldHaveButtons ? <Button onClick={() => randomItem(props.item.category)}>Swap</Button> : <Button onClick={() => delItem(item)}>Delete</Button>}
+        {shouldHaveButtons ? <Button onClick={() => {selectItem(item); } }>Keep</Button> : null}
+      </CardActions>
+    </Card>
+  );
 }
 
-// Item.propTypes = {
-//   classes: PropTypes.object.isRequired
-// }
+SimpleCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-export default withStyles(styles)(Item)
+export default withStyles(styles)(SimpleCard);
+

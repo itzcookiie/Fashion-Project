@@ -3,16 +3,18 @@ import { Form, Input, Select } from 'semantic-ui-react'
 
 const FormData = require('form-data');
 
+const options = [
+  { key: 'b', text: 'Bottoms', value: 'bottoms' },
+  { key: 't', text: 'Top', value: 'top' },
+  { key: 's', text: 'Shoes', value: 'shoes' },
+  { key: 'a', text: 'Accessories', value: 'accessories' },
+]
+
 class ClothingForm extends Component {
 
   render() {
     
-  const options = [
-    { key: 'b', text: 'bottoms', value: 'bottoms' },
-    { key: 't', text: 'Top', value: 'top' },
-    { key: 's', text: 'Shoes', value: 'shoes' },
-    { key: 'a', text: 'Accessories', value: 'accessories' },
-  ]
+
     const { value, garment, colour } = this.props
     const { handleChange, handleGarment, handleSubmit } = this.props
     return (
@@ -21,7 +23,7 @@ class ClothingForm extends Component {
         <Form.Group widths='equal'>
           <Form.Input fluid label='Garment' name='garment' placeholder='Image_url' onChange={handleGarment} value={garment} />
           <Form.Input fluid label='Colour' name='colour' placeholder='Colour' onChange={handleGarment} value={colour} />
-
+          {/* <Form.Select fluid label='Category' options={options} placeholder='category' /> */}
         </Form.Group>
         <Form.Group inline>
         <label>Category</label>
@@ -32,9 +34,9 @@ class ClothingForm extends Component {
             onChange={handleChange}
         />
         <Form.Radio
-            label='Trousaurs'
-            value='trousaurs'
-            checked={value === 'trousaurs'}
+            label='Bottoms'
+            value='bottom'
+            checked={value === 'bottom'}
             onChange={handleChange}
         />
         <Form.Radio
@@ -52,7 +54,6 @@ class ClothingForm extends Component {
         </Form.Group>
          <Form.Button onClick={handleSubmit}>Submit</Form.Button>
       </Form>
-      <div id='results' />
       </div>
     )
   }
