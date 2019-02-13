@@ -84,10 +84,51 @@ class Wardrobe extends React.Component {
     // }
   }
 
-  incrementCounter = (counter) => {
+  lessFour = (category, counter) => {
+    if (this.state[counter] > this.state[category].length) {
+
+    }
+  }
+
+  //Train of thought
+  //If counter goes beyound category.length array in state
+  //Make counter = the closest number that is divisible by 4
+  //E.g. for an array of length 10 that will be 12
+  //Then work from 12 and be able to minus by 4
+  decrementCounter = (category, counter) => {
+    if (this.state[counter] - this.state[category].length > 4) {
+      let diff = this.state[category].length % 4
+      let newDiff = 4 - diff 
+      let totalDiff = this.state[category].length + newDiff
+    this.setState({
+      [counter]: totalDiff - 8
+    })
+    } else if (this.state[counter] % 4 === 0 && this.state[counter] > 0) {
+    this.setState({
+      [counter]: this.state[counter] - 4
+    }) 
+  } else if (this.state[counter] === 0) {
+    this.setState({
+      [counter]: 0
+    })
+  } else {
+    this.setState({
+      [counter]: this.state[counter] - 4
+    })
+  }
+  }
+
+  incrementCounter = (category, counter) => {
+  //   if (this.state[counter] > this.state[category].length) {
+  //     this.setState({
+  //       [counter]: this.state[category].length
+  //     })
+
+  // } else {
     this.setState({
       [counter]: this.state[counter] + 4
     })
+  // }
   }
 
   arrayCounter = () => {
@@ -291,7 +332,7 @@ componentDidMount() {
         } = this.state
     const { handleClick, handleChange, handleGarment, handleSubmit, delItem,
      incrementCounter, nextFour, findRandomItem, findItem, displayOutfit,
-    keepItem, selectItem} = this
+    keepItem, selectItem, decrementCounter} = this
 
     return (
       <div style={this.style} className='user-list'>
@@ -307,7 +348,7 @@ componentDidMount() {
         items={items} delItem={delItem} 
         top={nextFour('top', 'counter1')} bottom={nextFour('bottom', 'counter2')}
         shoes={nextFour('shoes', 'counter3')} accessories={nextFour('accessories', 'counter4')} 
-        incrementCounter={incrementCounter}/>
+        incrementCounter={incrementCounter} decrementCounter={decrementCounter}/>
         <br />
         <button onClick={() => {this.setOutfit(); this.showDisplay()} }>Randomizer</button>
         <button onClick={() => { this.createOutfit(this.state.userItems); this.hideDisplay()} }>Select Outfit</button>

@@ -7,9 +7,10 @@ class OutfitsContainer extends Component {
         return (
             <div>
                 <h2>A single outfit</h2>
+                <button>Del Outfit</button>
                 {/* {console.log(this.props.outfit)} */}
                 {this.props.outfit.map(outfit =>
-                    < Item item={outfit} key={this.props.key} />)}
+                    < Item item={outfit} key={this.props.key} noButton={false} />)}
             </div>
         )
     }
@@ -17,3 +18,5 @@ class OutfitsContainer extends Component {
 }
 
 export default OutfitsContainer
+
+//Upload to database a picture + delete an outfit

@@ -26,7 +26,7 @@ const styles = {
 
 function SimpleCard(props) {
   const { classes, delItem, item, shouldHaveButtons, randomItem, findItem,
-  selectItem, displayOutfit, keepItem } = props;
+  selectItem, displayOutfit, keepItem, needDelButton, noButton } = props;
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
@@ -51,8 +51,10 @@ function SimpleCard(props) {
       </CardContent>
       <CardActions>
         {/* <Button size="small">Learn More</Button> */}
-        {shouldHaveButtons ? <Button onClick={() => randomItem(props.item.category)}>Swap</Button> : <Button onClick={() => delItem(item)}>Delete</Button>}
+        {shouldHaveButtons ? <Button onClick={() => randomItem(props.item.category)}>Swap</Button> : null}
         {shouldHaveButtons ? <Button onClick={() => {selectItem(item); } }>Keep</Button> : null}
+        {needDelButton ? <Button onClick={() => delItem(item)}>Delete</Button> : null}
+        {noButton ? null : null}
       </CardActions>
     </Card>
   );

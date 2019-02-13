@@ -14,7 +14,7 @@ class UserClothes extends Component {
               items.map(item =>
                 <Item findItem={findItem} randomItem={randomItem} shouldHaveButtons={true}
                  key={item.id} item={item} delItem={null} selectItem={selectItem}
-                 displayOutfit={displayOutfit} keepItem={keepItem} />
+                 displayOutfit={displayOutfit} keepItem={keepItem} noButtons={true} />
               )
             }
             </div>
