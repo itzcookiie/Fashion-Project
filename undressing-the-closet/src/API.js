@@ -7,7 +7,24 @@ class API {
         this.wardrobeURL = `${this.baseURL}/wardrobe`
         this.validateURL = `${this.baseURL}/validate`
         this.garmentsURL = `${this.baseURL}/garments`
+        //This URL is for creating outfits
+        this.outfitsURL = `${this.baseURL}/outfits`
+        this.getOutfitsURL = `${this.baseURL}/outfit`
         // this.singleGarmentURL = `${this.garmentsURL}/`
+    }
+
+    static getOutfits () {
+        return this.get(this.getOutfitsURL)
+    }
+
+    static createOutfit (outfit) {
+        const token = localStorage.getItem('token')
+        return fetch(this.outfitsURL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',
+            'Authorization': token},
+            body: JSON.stringify( outfit )
+        }).then(response => response.json())
     }
 
     static signin (user) {

@@ -5,53 +5,57 @@ import NewItem from './NewItem';
 
 class ClothesCollection extends Component {
 
-
+  //To go back to OG copy, take of onClick for increment Counter
 
     render() {
-        const { items, delItem, top, trousers, shoes, accessories } = this.props
+        const { items, delItem, top, bottom, shoes, accessories, incrementCounter } = this.props
         return (
             <div>
             <h2>Here's your wardrobe:</h2>
             { items.length === 0 && <p>Sorry, you don't have any items.</p>}
                 Tops:
             <div className='belt'>
+            <button>Less</button>
             {
               top.map(item =>
                 // <Item key={item.id} item={item} delItem={delItem}/>
-                <NewItem key={item.id} item={item} delItem={delItem}/>
+                <Item key={item.id} item={item} delItem={delItem}/>
               )
             }
+            <button onClick={() => incrementCounter('counter1')}>More</button>
             </div>
-            Trousers:
+            Bottom:
             <div className='belt'>
+            <button>Less</button>
             {
-              trousers.map(item =>
+              bottom.map(item =>
                 // <Item key={item.id} item={item} delItem={delItem}/>
-                <NewItem key={item.id} item={item} delItem={delItem}/>
+                <Item key={item.id} item={item} delItem={delItem}/>
               )
             }
+              <button onClick={() => incrementCounter('counter2')}>More</button>
                 </div>
             Shoes:
             <div className='belt'>
+            <button>Less</button>
             {
               shoes.map(item =>
                 // <Item key={item.id} item={item} delItem={delItem}/>
-                <NewItem key={item.id} item={item} delItem={delItem}/>
+                <Item key={item.id} item={item} delItem={delItem}/>
               )
             }
+            <button onClick={() => incrementCounter('counter3')}>More</button>
             </div>
             Accessories:
             <div className='belt'>
-                <div className="sushi">
-                    <div className="plate">
+            <button>Less</button>
             {
               accessories.map(item =>
                 // <Item key={item.id} item={item} delItem={delItem}/>
-                <NewItem key={item.id} item={item} delItem={delItem}/>
+                <Item key={item.id} item={item} delItem={delItem}/>
               )
             }
-            </div>
-            </div>
+            <button onClick={() => incrementCounter('counter4')}>More</button>
             </div>
 
             {/* <button onClick={handleClick}>Add a new item</button> */}

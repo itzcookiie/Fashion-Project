@@ -45,7 +45,16 @@ class UsersController < ApplicationController
         if @user 
             render json: @user.garments 
         else
-            render json: {error: 'User not found'}, status: 400
+            render json: {error: 'User not found/No garments found'}, status: 400
+        end
+    end
+
+    def get_outfits
+        @user = current_user
+        if @user
+            render json: @user.outfits 
+        else
+            render json: {error: 'User not found/No outfits found'}, status: 400
         end
     end
 
